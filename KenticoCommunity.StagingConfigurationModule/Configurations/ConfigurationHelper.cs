@@ -1,11 +1,16 @@
-﻿using System.Configuration;
+﻿using CMS;
+using CMS.Base;
+using KenticoCommunity.StagingConfigurationModule.Configurations;
+using KenticoCommunity.StagingConfigurationModule.Interfaces;
+using System.Configuration;
 using System.IO;
 using System.Web.Configuration;
-using CMS.Base;
 
-namespace KenticoCommunity.StagingConfigurationModule.Configuration
+[assembly: RegisterImplementation(typeof(IConfigurationHelper), typeof(ConfigurationHelper))]
+
+namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
-    public class ConfigurationHelper
+    public class ConfigurationHelper : IConfigurationHelper
     {
         /// <summary>
         /// Get the .NET Configuration object for the CMSApp app's web.config. This will
@@ -13,16 +18,16 @@ namespace KenticoCommunity.StagingConfigurationModule.Configuration
         /// ContinuousIntegration.exe
         /// </summary>
         /// <returns></returns>
-        public static System.Configuration.Configuration GetWebConfiguration()
+        public Configuration GetWebConfiguration()
         {
             var webDirectoryPath = SystemContext.WebApplicationPhysicalPath;
             return OpenConfiguration(webDirectoryPath);
         }
 
-        internal static System.Configuration.Configuration OpenConfiguration(string appPath)
+        public Configuration OpenConfiguration(string appPath, string configFileName = "web.config")
         {
-            VirtualDirectoryMapping mapping = new VirtualDirectoryMapping(appPath, true, "web.config");
-            WebConfigurationFileMap webConfigurationFileMap = new WebConfigurationFileMap();
+            var mapping = new VirtualDirectoryMapping(appPath, true, configFileName);
+            var webConfigurationFileMap = new WebConfigurationFileMap();
             webConfigurationFileMap.VirtualDirectories.Add(string.Empty, mapping);
             try
             {
@@ -32,7 +37,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Configuration
             {
                 return ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap
                 {
-                    ExeConfigFilename = Path.Combine(appPath, "web.config")
+                    ExeConfigFilename = Path.Combine(appPath, configFileName)
                 }, ConfigurationUserLevel.None);
             }
         }

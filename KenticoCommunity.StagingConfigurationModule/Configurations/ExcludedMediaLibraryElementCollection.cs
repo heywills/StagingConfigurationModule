@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 
-namespace KenticoCommunity.StagingConfigurationModule.Configuration
+namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
-    [ConfigurationCollection(typeof(ExcludedTypesElement), AddItemName = "type")]
-    public class ExcludedTypesElementCollection : ConfigurationElementCollection, IEnumerable<ExcludedTypesElement>
+
+    [ConfigurationCollection(typeof(ExcludedMediaLibraryElement), AddItemName = MediaLibraryElementName)]
+    public class ExcludedMediaLibraryElementCollection : ConfigurationElementCollection, IEnumerable<ExcludedMediaLibraryElement>
     {
+        private const string MediaLibraryElementName = "mediaLibrary";
+
         protected override ConfigurationElement CreateNewElement()
         {
-            return new ExcludedTypesElement();
+            return new ExcludedMediaLibraryElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((ExcludedTypesElement)element).Name;
+            return ((ExcludedMediaLibraryElement)element).Code;
         }
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
@@ -22,12 +24,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Configuration
         /// <remarks>Do not simply cast the collection, because it will cause an infinite loop.
         /// Both Enumerable.Cast<TResult>() and Enumerable.AsEnumerable<TResult>() extensions
         /// call IEnumerator<TResult> GetEnumerator()</remarks>
-        public new IEnumerator<ExcludedTypesElement> GetEnumerator()
+        public new IEnumerator<ExcludedMediaLibraryElement> GetEnumerator()
         {
             var count = base.Count;
             for (var i = 0; i < count; i++)
             {
-                yield return base.BaseGet(i) as ExcludedTypesElement;
+                yield return base.BaseGet(i) as ExcludedMediaLibraryElement;
             }
         }
     }
