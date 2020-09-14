@@ -1,11 +1,11 @@
-﻿using System.Configuration;
-using System.Linq;
-using KenticoCommunity.StagingConfigurationModule.Configurations;
+﻿using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Repositories;
 using KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers;
 using Moq;
 using NUnit.Framework;
+using System.Configuration;
+using System.Linq;
 
 namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
 {
@@ -15,13 +15,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         private readonly string _testProcessPath = PathHelper.GetTestConfigFilesDirectoryPath();
         private readonly ConfigurationHelper _configurationHelper = new ConfigurationHelper();
 
-        [SetUp]
-        public void TestSetup()
-        {
-        }
-
-
-        [TestCase(ConfigFileName.CorrectConfig, 13)]
+        [TestCase(ConfigFileName.CorrectConfig, 14)]
         [TestCase(ConfigFileName.EmptyCollections, 0)]
         [TestCase(ConfigFileName.MissingCollections, 0)]
         [TestCase(ConfigFileName.MissingSection, 0)]

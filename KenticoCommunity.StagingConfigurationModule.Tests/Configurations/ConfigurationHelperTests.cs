@@ -28,7 +28,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Configurations
         [Test]
         public void OpenConfiguration_Returns_Configuration_With_File_For_Configuration()
         {
-            var configFileName = "correct.config";
+            var configFileName = ConfigFileName.CorrectConfig;
             var configurationHelper = new ConfigurationHelper();
             var configuration = configurationHelper.OpenConfiguration(_testProcessPath, configFileName);
             Assert.IsTrue(configuration.HasFile);

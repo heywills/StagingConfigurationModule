@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers
+﻿namespace KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers
 {
     public static class ConfigFileName
     {
@@ -19,6 +13,5 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers
         public const string BadSectionName = "bad-section-name.config";
         public const string BadCollectionNames = "bad-collection-names.config";
         public const string Untrimmed = "untrimmed.config";
-        public const string MixedValidity = "mixed-validity.config";
     }
 }

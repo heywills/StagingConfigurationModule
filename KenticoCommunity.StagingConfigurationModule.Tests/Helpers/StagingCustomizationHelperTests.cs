@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CMS.Core;
+﻿using CMS.Core;
 using CMS.IO;
 using CMS.MediaLibrary;
 using CMS.Membership;
+using CMS.Synchronization;
 using CMS.Tests;
 using KenticoCommunity.StagingConfigurationModule.Helpers;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Models;
 using KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 
 namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
@@ -69,10 +69,37 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             Assert.IsFalse(result);
         }
 
-        [Test]
-        public void IsExcludedChildType_Returns_True_If_Parent_Type_And_Child_Type_In_Exclusion_List()
+        [TestCase("cms.role", "cms.userrole", true)]
+        [TestCase("cms.role", "cms.rolepermission", false)]
+        [TestCase("cms.user", "cms.usersite", false)]
+        [TestCase("cms.documenttype", "cms.documenttypescope", false)]
+        public void IsExcludedChildType_Returns_Expected(string parentType, string childType, bool expectedResult)
         {
+            var excludedChildTypes = new List<ParentChildTypePair>
+            {
+                new ParentChildTypePair
+                {
+                    ParentType = "cms.role",
+                    ChildType = "cms.userrole"
+                },
+                new ParentChildTypePair
+                {
+                    ParentType = "cms.user",
+                    ChildType = "cms.badge"
+                }
+            };
 
+            var mockSettingsRepository =
+                CreateMockSettingsRepository(excludedChildTypes: excludedChildTypes);
+            var mockEventLogService = CreateMockEventLogService();
+            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingChildProcessingTypeEventArgs = new StagingChildProcessingTypeEventArgs()
+                {
+                    ParentObjectType = parentType,
+                    ObjectType = childType
+                };
+            var result = stagingCustomizationHelper.IsExcludedChildType(stagingChildProcessingTypeEventArgs);
+            Assert.AreEqual(expectedResult, result);
         }
 
 
