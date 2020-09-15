@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("KenticoCommunity.StagingConfigurationModule")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simplify Kentico Xperience deployments using this module. It enables configuring the staging feature, so that Kentico objects can be automatically excluded by type, child relationships, and even media libraries.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("KenticoCommunity.StagingConfigurationModule")]
