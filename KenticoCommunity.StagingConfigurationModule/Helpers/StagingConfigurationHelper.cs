@@ -11,19 +11,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-[assembly: RegisterImplementation(typeof(IStagingCustomizationHelper), typeof(StagingCustomizationHelper))]
+[assembly: RegisterImplementation(typeof(IStagingCustomizationHelper), typeof(StagingConfigurationHelper))]
 
 namespace KenticoCommunity.StagingConfigurationModule.Helpers
 {
-    internal class StagingCustomizationHelper : IStagingCustomizationHelper
+    internal class StagingConfigurationHelper : IStagingCustomizationHelper
     {
-        private const string ModuleName = "StagingCustomizationModule";
+        private const string ModuleName = "StagingConfigurationModule";
         private readonly IEventLogService _eventLogService;
         private readonly List<string> _excludedTypes;
         private readonly List<ParentChildTypePair> _excludedChildTypes;
         private readonly List<string> _excludedMediaLibraries;
 
-        public StagingCustomizationHelper(ISettingsRepository settingRepository, IEventLogService eventLogService)
+        public StagingConfigurationHelper(ISettingsRepository settingRepository, IEventLogService eventLogService)
         {
             var settingsRepository = settingRepository;
             _eventLogService = eventLogService;

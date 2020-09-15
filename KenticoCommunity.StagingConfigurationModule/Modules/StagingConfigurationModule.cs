@@ -1,29 +1,30 @@
 ﻿using CMS;
 using CMS.Core;
 using CMS.DataEngine;
+using CMS.MediaLibrary;
 using CMS.Synchronization;
-using KenticoCommunity.StagingConfigurationModule;
+using KenticoCommunity.StagingConfigurationModule.Modules;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 
-[assembly: RegisterModule(typeof(StagingCustomizationModule))]
+[assembly: RegisterModule(typeof(StagingConfigurationModule))]
 
-namespace KenticoCommunity.StagingConfigurationModule
+namespace KenticoCommunity.StagingConfigurationModule.Modules
 {
     /// <summary>
     /// Custom Module to override Kentico staging task events
     /// </summary>
-    public class StagingCustomizationModule : Module
+    public class StagingConfigurationModule : Module
     {
-        private readonly IStagingCustomizationHelper _stagingCustomizationModuleHelper;
+        private IStagingCustomizationHelper _stagingCustomizationModuleHelper;
 
-        public StagingCustomizationModule() : base(nameof(StagingCustomizationModule))
+        public StagingConfigurationModule() : base(nameof(StagingConfigurationModule))
         {
-            _stagingCustomizationModuleHelper = Service.Resolve<IStagingCustomizationHelper>();
         }
 
 
         protected override void OnInit()
         {
+            _stagingCustomizationModuleHelper = Service.Resolve<IStagingCustomizationHelper>();
             base.OnInit();
 
             StagingEvents.LogTask.Before += LogTaskBefore;
@@ -43,16 +44,19 @@ namespace KenticoCommunity.StagingConfigurationModule
         {
             if (_stagingCustomizationModuleHelper.IsExcludedMediaLibraryFile(e.Object))
             {
-                var message = $"Preventing creation of staging task for media file in an excluded library.";
-                _stagingCustomizationModuleHelper.LogInformation(nameof(LogTaskBefore), message);
+                var mediaFileInfo = e.Object as MediaFileInfo;
+                var mediaLibraryInfo = mediaFileInfo?.Parent as MediaLibraryInfo;
+
+                var message = $"Preventing creation of staging task for media file in an excluded library, {mediaLibraryInfo?.LibraryName}.";
+                _stagingCustomizationModuleHelper.LogInformation("ExcludeMediaFile", message);
                 e.Cancel();
                 return;
             }
 
             if (_stagingCustomizationModuleHelper.IsExcludedObjectType(e.Object))
             {
-                var message = $"Preventing creation of staging task for excluded type, {e.Object?.TypeInfo}.";
-                _stagingCustomizationModuleHelper.LogInformation(nameof(LogTaskBefore), message);
+                var message = $"Preventing creation of staging task for excluded type, {e.Object?.TypeInfo?.ObjectType}.";
+                _stagingCustomizationModuleHelper.LogInformation("ExcludeObjectType", message);
                 e.Cancel();
             }
         }
@@ -69,7 +73,7 @@ namespace KenticoCommunity.StagingConfigurationModule
             if (_stagingCustomizationModuleHelper.IsExcludedChildType(eventArgs))
             {
                 var message = $"Preventing {currentChildType} from being synchronized with {currentParentType}.";
-                _stagingCustomizationModuleHelper.LogInformation(nameof(GetChildProcessingType), message);
+                _stagingCustomizationModuleHelper.LogInformation("ExcludeChildType", message);
                 eventArgs.ProcessingType = IncludeToParentEnum.None;
             }
         }

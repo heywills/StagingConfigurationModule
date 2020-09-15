@@ -17,7 +17,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
 {
     [TestFixture]
 
-    public class StagingCustomizationHelperTests: UnitTests
+    public class StagingConfigurationHelperTests: UnitTests
     {
         [Test]
         public void IsExcludedObjectType_Returns_True_If_Type_In_Exclusion_List()
@@ -25,7 +25,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockSettingsRepository =
                 CreateMockSettingsRepository(excludedTypes: (new List<string>() { "cms.user", "cms.form" }));
             var mockEventLogService = CreateMockEventLogService();
-            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             Fake<UserInfo>();
             var userInfo = new UserInfo();
             var result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
@@ -38,7 +38,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockSettingsRepository =
                 CreateMockSettingsRepository(excludedTypes: (new List<string>() { "cms.form" }));
             var mockEventLogService = CreateMockEventLogService();
-            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             Fake<UserInfo>();
             var userInfo = new UserInfo();
             var result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
@@ -51,7 +51,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockSettingsRepository =
                 CreateMockSettingsRepository(excludedMediaLibraries: (new List<string>() {"emailTemplateAssets", "globalAssets"}));
             var mockEventLogService = CreateMockEventLogService();
-            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             var mediaFileInfo = GetFakeMediaFileInfo("EMAILtemplateassets");
             var result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
             Assert.IsTrue(result);
@@ -63,7 +63,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockSettingsRepository =
                 CreateMockSettingsRepository(excludedMediaLibraries: (new List<string>() { "globalAssets" }));
             var mockEventLogService = CreateMockEventLogService();
-            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             var mediaFileInfo = GetFakeMediaFileInfo("emailTemplateAssets");
             var result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
             Assert.IsFalse(result);
@@ -92,7 +92,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockSettingsRepository =
                 CreateMockSettingsRepository(excludedChildTypes: excludedChildTypes);
             var mockEventLogService = CreateMockEventLogService();
-            var stagingCustomizationHelper = new StagingCustomizationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
+            var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             var stagingChildProcessingTypeEventArgs = new StagingChildProcessingTypeEventArgs()
                 {
                     ParentObjectType = parentType,

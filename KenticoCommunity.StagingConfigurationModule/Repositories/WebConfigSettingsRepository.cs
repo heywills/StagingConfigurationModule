@@ -13,6 +13,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
     internal class WebConfigSettingsRepository:ISettingsRepository
     {
         private readonly StagingConfigurationSection _stagingConfigurationSection;
+        private readonly SourceServerElement _sourceServerElement;
+        private readonly TargetServerElement _targetServerSection;
 
         public WebConfigSettingsRepository(IConfigurationHelper configurationHelper)
         {
@@ -20,14 +22,16 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
             _stagingConfigurationSection =
                 configuration?.GetSection(StagingConfigurationSection.StagingConfigurationSectionName) as
                     StagingConfigurationSection;
+            _sourceServerElement = _stagingConfigurationSection?.SourceServerElement;
+            _targetServerSection = _stagingConfigurationSection?.TargetServerSection;
 
         }
 
         public List<string> GetExcludedTypes()
         {
-            if (_stagingConfigurationSection != null)
+            if (_sourceServerElement != null)
             {
-                return _stagingConfigurationSection.ExcludedTypesElementCollection
+                return _sourceServerElement.ExcludedTypesElementCollection
                     .Where(x => !string.IsNullOrWhiteSpace(x.Name)).Select(x => x.Name.Trim()).ToList();
             }
             else
@@ -38,9 +42,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
 
         public List<ParentChildTypePair> GetExcludedChildTypes()
         {
-            if (_stagingConfigurationSection != null)
+            if (_targetServerSection != null)
             {
-                return _stagingConfigurationSection.ExcludedChildTypeElementCollection
+                return _targetServerSection.ExcludedChildTypeElementCollection
                     .Where(x => (!(string.IsNullOrWhiteSpace(x.ParentType) || string.IsNullOrWhiteSpace(x.ChildType))))
                     .Select(x => new ParentChildTypePair()
                         {ParentType = x.ParentType.Trim(), ChildType = x.ChildType.Trim()})
@@ -54,9 +58,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
 
         public List<string> GetExcludedMediaLibraries()
         {
-            if (_stagingConfigurationSection != null)
+            if (_sourceServerElement != null)
             {
-                return _stagingConfigurationSection.ExcludedMediaLibraryElementCollection
+                return _sourceServerElement.ExcludedMediaLibraryElementCollection
                     .Where(x => !string.IsNullOrWhiteSpace(x.Code)).Select(x => x.Code.Trim()).ToList();
             }
             else

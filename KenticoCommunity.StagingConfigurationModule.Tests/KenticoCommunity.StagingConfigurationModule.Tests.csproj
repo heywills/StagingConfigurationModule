@@ -483,7 +483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\ConfigurationHelperTests.cs" />
-    <Compile Include="Helpers\StagingCustomizationHelperTests.cs" />
+    <Compile Include="Helpers\StagingConfigurationHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\WebConfigSettingsRepositoryTests.cs" />
     <Compile Include="TestHelpers\ConfigFileName.cs" />
@@ -521,7 +521,6 @@
     <None Include="ConfigFiles\missing-section.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ConfigFiles\packages.config" />
     <None Include="ConfigFiles\correct.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

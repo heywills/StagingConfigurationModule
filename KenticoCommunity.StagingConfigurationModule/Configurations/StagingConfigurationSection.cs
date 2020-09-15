@@ -6,29 +6,15 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
     public class StagingConfigurationSection : ConfigurationSection
     {
         public const string StagingConfigurationSectionName = "stagingConfiguration";
-        private const string ExcludedTypeCollectionName = "excludedTypes";
-        private const string ExcludedMediaLibrariesCollectionName = "excludedMediaLibraries";
-        private const string ExcludedChildTypeCollectionName = "excludedChildTypes";
+        public const string SourceServerSectionName = "sourceServer";
+        public const string TargetServerSectionName = "targetServer";
 
-        [ConfigurationProperty(ExcludedTypeCollectionName, IsDefaultCollection = true)]
-        public ExcludedTypeElementCollection ExcludedTypesElementCollection
-        {
-            get => (ExcludedTypeElementCollection)this[ExcludedTypeCollectionName];
-            set => this[ExcludedTypeCollectionName] = value;
-        }
+        [ConfigurationProperty(SourceServerSectionName)]
+        public SourceServerElement SourceServerElement =>
+            (this[SourceServerSectionName] as SourceServerElement);
 
-        [ConfigurationProperty(ExcludedMediaLibrariesCollectionName, IsDefaultCollection = false)]
-        public ExcludedMediaLibraryElementCollection ExcludedMediaLibraryElementCollection
-        {
-            get => (ExcludedMediaLibraryElementCollection)this[ExcludedMediaLibrariesCollectionName];
-            set => this[ExcludedMediaLibrariesCollectionName] = value;
-        }
-
-        [ConfigurationProperty(ExcludedChildTypeCollectionName, IsDefaultCollection = false)]
-        public ExcludedChildTypeElementCollection ExcludedChildTypeElementCollection
-        {
-            get => (ExcludedChildTypeElementCollection)this[ExcludedChildTypeCollectionName];
-            set => this[ExcludedChildTypeCollectionName] = value;
-        }
+        [ConfigurationProperty(TargetServerSectionName)]
+        public TargetServerElement TargetServerSection =>
+            (this[TargetServerSectionName] as TargetServerElement);
     }
 }

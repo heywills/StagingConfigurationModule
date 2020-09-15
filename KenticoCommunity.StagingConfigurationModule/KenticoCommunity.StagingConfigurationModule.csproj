@@ -456,7 +456,9 @@
     <Compile Include="Configurations\ExcludedTypeElement.cs" />
     <Compile Include="Configurations\ExcludedChildTypeElementCollection.cs" />
     <Compile Include="Configurations\ExcludedTypeElementCollection.cs" />
-    <Compile Include="Helpers\StagingCustomizationHelper.cs" />
+    <Compile Include="Configurations\SourceServerElement.cs" />
+    <Compile Include="Configurations\TargetServerElement.cs" />
+    <Compile Include="Helpers\StagingConfigurationHelper.cs" />
     <Compile Include="Interfaces\IConfigurationHelper.cs" />
     <Compile Include="Interfaces\ISettingsRepository.cs" />
     <Compile Include="Interfaces\IStagingCustomizationHelper.cs" />
@@ -464,10 +466,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\WebConfigSettingsRepository.cs" />
     <Compile Include="Configurations\StagingConfigurationSection.cs" />
-    <Compile Include="StagingCustomizationModule.cs" />
+    <Compile Include="Modules\StagingConfigurationModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

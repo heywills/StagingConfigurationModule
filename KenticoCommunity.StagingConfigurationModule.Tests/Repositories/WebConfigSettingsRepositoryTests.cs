@@ -21,7 +21,6 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         [TestCase(ConfigFileName.MissingSection, 0)]
         [TestCase(ConfigFileName.NoConfig, 0)]
         [TestCase(ConfigFileName.BlankAttributesConfig, 0)]
-        [TestCase(ConfigFileName.BadSectionName, 0)]
         public void GetExcludedTypes_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var mockConfigurationHelper = CreateMockConfigurationHelperForFile(configFileName);
@@ -45,7 +44,6 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         [TestCase(ConfigFileName.MissingSection, 0)]
         [TestCase(ConfigFileName.NoConfig, 0)]
         [TestCase(ConfigFileName.BlankAttributesConfig, 0)]
-        [TestCase(ConfigFileName.BadSectionName, 0)]
         public void GetExcludedMediaLibraries_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var mockConfigurationHelper = CreateMockConfigurationHelperForFile(configFileName);
@@ -70,7 +68,6 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         [TestCase(ConfigFileName.MissingSection, 0)]
         [TestCase(ConfigFileName.NoConfig, 0)]
         [TestCase(ConfigFileName.BlankAttributesConfig, 0)]
-        [TestCase(ConfigFileName.BadSectionName, 0)]
         public void GetExcludedChildTypes_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var mockConfigurationHelper = CreateMockConfigurationHelperForFile(configFileName);
@@ -93,6 +90,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         [TestCase(ConfigFileName.MissingAttributes)]
         [TestCase(ConfigFileName.BadElementNames)]
         [TestCase(ConfigFileName.BadCollectionNames)]
+        [TestCase(ConfigFileName.BadSectionName)]
         public void WebConfigSettingsRepository_Constructor_Throws_ConfigurationErrorsException_If_InvalidConfiguration(string configFileName)
         {
             var mockConfigurationHelper = CreateMockConfigurationHelperForFile(configFileName);
