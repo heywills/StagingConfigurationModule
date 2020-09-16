@@ -3,15 +3,23 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.MediaLibrary;
 using CMS.Synchronization;
-using KenticoCommunity.StagingConfigurationModule.Modules;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
+using KenticoCommunity.StagingConfigurationModule.Modules;
 
 [assembly: RegisterModule(typeof(StagingConfigurationModule))]
 
 namespace KenticoCommunity.StagingConfigurationModule.Modules
 {
     /// <summary>
-    /// Custom Module to override Kentico staging task events
+    /// This module reads configurable settings to limit the Kentico objects that are staged from a source environment to a
+    /// target environment. If configured correctly, it eliminates the need to maintain lists of objects that need to be
+    /// deployed with each build. By excluding the objects that you would never want to deploy, you are able to synchronize
+    /// all staging tasks whenever a deployment is required. This eliminates human error, the oops-I-forgot-to-deploy-X
+    /// scenario. This module should be installed in a source environment so that it can use the
+    /// `StagingEvents.LogTask.Before` event to limit the types of Kentico objects that create staging tasks. Additionally,
+    /// it should be installed on the target environment so that it can use the
+    /// `StagingEvents.GetChildProcessingType.Execute` event , to control how child relationships are processed on the
+    /// target server.
     /// </summary>
     public class StagingConfigurationModule : Module
     {
@@ -21,7 +29,13 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
         {
         }
 
-
+        /// <summary>
+        /// Initialize the module by creating the StagingCustomizationHelper and setting up the global system events.
+        /// </summary>
+        /// <remarks>
+        /// The first dependency is created using Service.Resolve, which uses the DI container. However, all other dependencies in
+        /// the chain will be created automatically using constructor-based injection.
+        /// </remarks>
         protected override void OnInit()
         {
             _stagingCustomizationModuleHelper = Service.Resolve<IStagingCustomizationHelper>();
@@ -32,13 +46,10 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
         }
 
         /// <summary>
-        /// Stops user objects being created into staging tasks.
+        /// Stop staging tasks from being created for any object type that is in the excluded-types list. This prevents tasks from
+        /// being created in the staging source environment.
         /// </summary>
-        /// <remarks>
-        /// This prevents data of specific types from being able to be staged from one environment to another.
-        /// </remarks>
         /// <param name="sender">The calling object</param>
-        /// <remarks>It is possible for the sender to be null</remarks>
         /// <param name="e">The StagingLogTaskEventArgs arguments</param>
         public void LogTaskBefore(object sender, StagingLogTaskEventArgs e)
         {
@@ -47,7 +58,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
                 var mediaFileInfo = e.Object as MediaFileInfo;
                 var mediaLibraryInfo = mediaFileInfo?.Parent as MediaLibraryInfo;
 
-                var message = $"Preventing creation of staging task for media file in an excluded library, {mediaLibraryInfo?.LibraryName}.";
+                var message =
+                    $"Preventing creation of staging task for media file in an excluded library, {mediaLibraryInfo?.LibraryName}.";
                 _stagingCustomizationModuleHelper.LogInformation("ExcludeMediaFile", message);
                 e.Cancel();
                 return;
@@ -55,14 +67,17 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
 
             if (_stagingCustomizationModuleHelper.IsExcludedObjectType(e.Object))
             {
-                var message = $"Preventing creation of staging task for excluded type, {e.Object?.TypeInfo?.ObjectType}.";
+                var message =
+                    $"Preventing creation of staging task for excluded type, {e.Object?.TypeInfo?.ObjectType}.";
                 _stagingCustomizationModuleHelper.LogInformation("ExcludeObjectType", message);
                 e.Cancel();
             }
         }
 
         /// <summary>
-        /// Prevents users in a role being synchronized
+        /// Modify how object relationships are processed in the target environment, by changing the `ProcessingType` from
+        /// `IncludeToParentEnum.Complete` to `IncludeToParentEnum.None`.  This will prevent a staging task from wiping out the
+        /// child collection of an object, like deleting all the user relationships in a role.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
