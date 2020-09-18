@@ -23,7 +23,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
     /// </summary>
     public class StagingConfigurationModule : Module
     {
-        private IStagingCustomizationHelper _stagingCustomizationModuleHelper;
+        private IStagingConfigurationHelper _stagingCustomizationModuleHelper;
 
         public StagingConfigurationModule() : base(nameof(StagingConfigurationModule))
         {
@@ -38,7 +38,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
         /// </remarks>
         protected override void OnInit()
         {
-            _stagingCustomizationModuleHelper = Service.Resolve<IStagingCustomizationHelper>();
+            _stagingCustomizationModuleHelper = Service.Resolve<IStagingConfigurationHelper>();
             base.OnInit();
 
             StagingEvents.LogTask.Before += LogTaskBefore;

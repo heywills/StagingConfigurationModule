@@ -3,6 +3,9 @@
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
 
+    /// <summary>
+    /// A configuration section for containing settings for the Staging Configuration Module.
+    /// </summary>
     public class StagingConfigurationSection : ConfigurationSection
     {
         public const string StagingConfigurationSectionName = "stagingConfiguration";

@@ -3,7 +3,9 @@ using System.Configuration;
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
-
+    /// <summary>
+    /// Represents a collection of ExcludedMediaLibraryElements in the configuration, to provide a list of media library code names for which the contained files should be excluded from staging tasks on the source server.
+    /// </summary>
     [ConfigurationCollection(typeof(ExcludedMediaLibraryElement), AddItemName = MediaLibraryElementName)]
     public class ExcludedMediaLibraryElementCollection : ConfigurationElementCollection, IEnumerable<ExcludedMediaLibraryElement>
     {

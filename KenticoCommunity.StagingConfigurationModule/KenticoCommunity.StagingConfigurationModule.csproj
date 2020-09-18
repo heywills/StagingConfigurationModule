@@ -461,7 +461,7 @@
     <Compile Include="Helpers\StagingConfigurationHelper.cs" />
     <Compile Include="Interfaces\IConfigurationHelper.cs" />
     <Compile Include="Interfaces\ISettingsRepository.cs" />
-    <Compile Include="Interfaces\IStagingCustomizationHelper.cs" />
+    <Compile Include="Interfaces\IStagingConfigurationHelper.cs" />
     <Compile Include="Models\ParentChildTypePair.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\WebConfigSettingsRepository.cs" />

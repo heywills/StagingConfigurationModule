@@ -3,6 +3,9 @@ using System.Configuration;
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
+    /// <summary>
+    /// Represents a collection of ExcludedTypeElements in the configuration, to provide a list of object types that should be excluded from staging tasks on the source server.
+    /// </summary>
     [ConfigurationCollection(typeof(ExcludedTypeElement), AddItemName = ExcludedTypeElementName)]
     public class ExcludedTypeElementCollection : ConfigurationElementCollection, IEnumerable<ExcludedTypeElement>
     {

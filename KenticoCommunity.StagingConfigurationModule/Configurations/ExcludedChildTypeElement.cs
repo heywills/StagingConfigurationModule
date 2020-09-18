@@ -2,6 +2,9 @@
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
+    /// <summary>
+    /// Represents an element in the configuration for storing a parent type/child type relationship
+    /// </summary>
     public class ExcludedChildTypeElement : ConfigurationElement
     {
         private const string ParentTypeAttributeName = "parentType";

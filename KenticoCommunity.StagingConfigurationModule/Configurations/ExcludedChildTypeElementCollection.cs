@@ -3,6 +3,9 @@ using System.Configuration;
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
+    /// <summary>
+    /// Represents a collection of ExcludedChildTypeElements, used to store parent type/child type relationships in the configuration file -- parent/child relationships that should not be processed by the target staging services.
+    /// </summary>
     [ConfigurationCollection(typeof(ExcludedChildTypeElement), AddItemName = ChildTypeElementName)]
     public class ExcludedChildTypeElementCollection : ConfigurationElementCollection, IEnumerable<ExcludedChildTypeElement>
     {

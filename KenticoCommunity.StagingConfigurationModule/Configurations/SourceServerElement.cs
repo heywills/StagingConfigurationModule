@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
+    /// <summary>
+    /// A configuration element for containing settings that belong to the source staging service.
+    /// </summary>
     public class SourceServerElement :  ConfigurationElement
     {
         private const string ExcludedTypeCollectionName = "excludedTypes";

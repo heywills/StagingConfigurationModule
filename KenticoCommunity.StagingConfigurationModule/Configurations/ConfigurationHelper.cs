@@ -10,12 +10,13 @@ using System.Web.Configuration;
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
+    /// <summary>
+    /// Helper class to provide the correct configuration file for the current context. This will ensure the web.config file for the CMS app is used, even if the module is running in ContinuousIntegration.exe.
+    /// </summary>
     public class ConfigurationHelper : IConfigurationHelper
     {
         /// <summary>
-        /// Get the .NET Configuration object for the CMSApp app's web.config. This will
-        /// load the web.config file whether running in the Kentico Web App or running in
-        /// ContinuousIntegration.exe
+        /// Get the .NET Configuration object for the CMSApp app's web.config. This will load the web.config file whether running in the Kentico Web App or running in ContinuousIntegration.exe
         /// </summary>
         /// <returns></returns>
         public Configuration GetWebConfiguration()
@@ -24,6 +25,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
             return OpenConfiguration(webDirectoryPath);
         }
 
+        /// <summary>
+        /// Open the configuration file in the given application path withthe given configuration file name.
+        /// </summary>
+        /// <param name="appPath"></param>
+        /// <param name="configFileName"></param>
+        /// <returns></returns>
         public Configuration OpenConfiguration(string appPath, string configFileName = "web.config")
         {
             var mapping = new VirtualDirectoryMapping(appPath, true, configFileName);
