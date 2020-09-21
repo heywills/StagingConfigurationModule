@@ -3,7 +3,7 @@
 namespace KenticoCommunity.StagingConfigurationModule.Interfaces
 {
     /// <summary>
-    /// Helper to provide the correct configuration file for the current context. 
+    /// Helper to provide the correct configuration file for the current context.
     /// </summary>
     public interface IConfigurationHelper
     {

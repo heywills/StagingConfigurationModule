@@ -12,7 +12,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
         [ConfigurationProperty(ExcludedChildTypeCollectionName, IsDefaultCollection = false)]
         public ExcludedChildTypeElementCollection ExcludedChildTypeElementCollection
         {
-            get => (ExcludedChildTypeElementCollection)this[ExcludedChildTypeCollectionName];
+            get => (ExcludedChildTypeElementCollection) this[ExcludedChildTypeCollectionName];
             set => this[ExcludedChildTypeCollectionName] = value;
         }
     }

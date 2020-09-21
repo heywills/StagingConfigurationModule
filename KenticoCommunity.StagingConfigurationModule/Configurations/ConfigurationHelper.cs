@@ -1,22 +1,24 @@
-﻿using CMS;
+﻿using System.Configuration;
+using System.IO;
+using System.Web.Configuration;
+using CMS;
 using CMS.Base;
 using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
-using System.Configuration;
-using System.IO;
-using System.Web.Configuration;
 
 [assembly: RegisterImplementation(typeof(IConfigurationHelper), typeof(ConfigurationHelper))]
 
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
     /// <summary>
-    /// Helper class to provide the correct configuration file for the current context. This will ensure the web.config file for the CMS app is used, even if the module is running in ContinuousIntegration.exe.
+    /// Helper class to provide the correct configuration file for the current context. This will ensure the web.config file
+    /// for the CMS app is used, even if the module is running in ContinuousIntegration.exe.
     /// </summary>
     public class ConfigurationHelper : IConfigurationHelper
     {
         /// <summary>
-        /// Get the .NET Configuration object for the CMSApp app's web.config. This will load the web.config file whether running in the Kentico Web App or running in ContinuousIntegration.exe
+        /// Get the .NET Configuration object for the CMSApp app's web.config. This will load the web.config file whether running
+        /// in the Kentico Web App or running in ContinuousIntegration.exe
         /// </summary>
         /// <returns></returns>
         public Configuration GetWebConfiguration()

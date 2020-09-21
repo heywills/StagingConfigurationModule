@@ -13,14 +13,14 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
         [ConfigurationProperty(ParentTypeAttributeName, DefaultValue = "", IsKey = false, IsRequired = true)]
         public string ParentType
         {
-            get => (string)this[ParentTypeAttributeName];
+            get => (string) this[ParentTypeAttributeName];
             set => this[ParentTypeAttributeName] = value;
         }
 
         [ConfigurationProperty(ChildTypeAttributeName, DefaultValue = "", IsKey = false, IsRequired = true)]
         public string ChildType
         {
-            get => (string)this[ChildTypeAttributeName];
+            get => (string) this[ChildTypeAttributeName];
             set => this[ChildTypeAttributeName] = value;
         }
     }

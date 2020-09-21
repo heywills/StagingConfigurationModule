@@ -1,5 +1,5 @@
-﻿using KenticoCommunity.StagingConfigurationModule.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KenticoCommunity.StagingConfigurationModule.Models;
 
 namespace KenticoCommunity.StagingConfigurationModule.Interfaces
 {

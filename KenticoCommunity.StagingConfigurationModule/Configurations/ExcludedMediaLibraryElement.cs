@@ -3,7 +3,8 @@
 namespace KenticoCommunity.StagingConfigurationModule.Configurations
 {
     /// <summary>
-    /// Represents a configuration element for holding the code name of a Media Library to be excluded from staging task creation on the source server.
+    /// Represents a configuration element for holding the code name of a Media Library to be excluded from staging task
+    /// creation on the source server.
     /// </summary>
     public class ExcludedMediaLibraryElement : ConfigurationElement
     {
@@ -12,7 +13,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
         [ConfigurationProperty(CodeAttributeName, DefaultValue = "", IsKey = true, IsRequired = true)]
         public string Code
         {
-            get => (string)this[CodeAttributeName];
+            get => (string) this[CodeAttributeName];
             set => this[CodeAttributeName] = value;
         }
     }
