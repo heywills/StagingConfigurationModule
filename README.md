@@ -169,7 +169,7 @@ Web.config transformations is a powerful way to provide environment-specific set
 
 ## License
 
-This project uses a standard MIT license which can be found [here](https://github.com/heywills/StagingConfigurationModule/blob/master/license).
+This project uses a standard MIT license which can be found [here](https://github.com/heywills/StagingConfigurationModule/blob/master/LICENSE).
 
 ## Contribution
 
