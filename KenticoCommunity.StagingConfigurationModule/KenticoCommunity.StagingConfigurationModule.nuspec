@@ -15,7 +15,7 @@
 		<copyright>2020 Kentico Community</copyright>
 		<tags>Kentico Xperience Staging Deployment</tags>
 		<dependencies>
-			<dependency id="Kentico.Libraries" version="[12.0.39,12.1.0)" />
+			<dependency id="Kentico.Libraries" version="[12.0.29,12.1.0)" />
 		</dependencies>
 	</metadata>
 	<files>
