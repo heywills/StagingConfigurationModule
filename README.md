@@ -84,6 +84,7 @@ Here's the configuration I typically add to a lower environment (e.g. dev, qa, o
       <type name="cms.usersite" />
       <type name="cms.usermacroidentity" />
       <type name="ma.automationprocess" />
+      <type name="cms.objectworkflowtrigger" />
       <type name="newsletter.emailtemplatenewsletter" />
       <type name="newsletter.issue" />
       <type name="newsletter.newsletter" />
@@ -102,9 +103,12 @@ Here's the configuration I typically add to a lower environment (e.g. dev, qa, o
 ```
 
 ### Prevent creating staging tasks for a type
-The most common use of this module is to prevent changes to certain types of objects from being captured as staging tasks on a source server.  Since the creation of staging tasks is controlled on the source server, add or remove `type` elements inside the `excludedTypes` child section within the `sourceServer` section.  So, if you want to prevent marketing automation processes from being staged, add the following `type` element:
+The most common use of this module is to prevent changes to certain types of objects from being captured as staging tasks on a source server.  Since the creation of staging tasks is controlled on the source server, add or remove `type` elements inside the `excludedTypes` child section within the `sourceServer` section.  So, if you want to prevent marketing automation processes from being staged, add the following `type` elements:
 
-```<type name="ma.automationprocess" />```
+```
+<type name="ma.automationprocess" />
+<type name="cms.objectworkflowtrigger" />
+```
 
 ### Prevent processing child objects
 

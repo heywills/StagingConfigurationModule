@@ -15,7 +15,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         private readonly string _testProcessPath = PathHelper.GetTestConfigFilesDirectoryPath();
         private readonly ConfigurationHelper _configurationHelper = new ConfigurationHelper();
 
-        [TestCase(ConfigFileName.CorrectConfig, 14)]
+        [TestCase(ConfigFileName.CorrectConfig, 15)]
         [TestCase(ConfigFileName.EmptyCollections, 0)]
         [TestCase(ConfigFileName.MissingCollections, 0)]
         [TestCase(ConfigFileName.MissingSection, 0)]
