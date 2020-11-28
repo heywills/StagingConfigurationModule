@@ -85,9 +85,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Helpers
         /// </summary>
         /// <param name="source"></param>
         /// <param name="message"></param>
-        public void LogInformation(string source, string message)
+        public void LogInformation(string eventCode, string description)
         {
-            _eventLogService.LogEvent(EventType.INFORMATION, ModuleName, source, message);
+            _eventLogService.LogInformation(ModuleName, eventCode, description);
         }
     }
 }

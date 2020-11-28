@@ -7,7 +7,7 @@
     /// </summary>
     public class ParentChildTypePair
     {
-        public string ChildType;
-        public string ParentType;
+        public string ParentType { get; set; }
+        public string ChildType { get; set; }
     }
 }

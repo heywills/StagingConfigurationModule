@@ -118,8 +118,6 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
         private Mock<IEventLogService> CreateMockEventLogService()
         {
             var mockEventLogService = new Mock<IEventLogService>();
-            mockEventLogService.Setup(m =>
-                m.LogEvent(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
             return mockEventLogService;
         }
 

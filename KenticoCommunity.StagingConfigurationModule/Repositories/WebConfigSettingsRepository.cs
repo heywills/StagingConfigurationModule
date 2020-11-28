@@ -5,6 +5,7 @@ using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Models;
 using KenticoCommunity.StagingConfigurationModule.Repositories;
+using Microsoft.Extensions.Options;
 
 [assembly: RegisterImplementation(typeof(ISettingsRepository), typeof(WebConfigSettingsRepository))]
 
@@ -40,17 +41,14 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
     /// </summary>
     internal class WebConfigSettingsRepository : ISettingsRepository
     {
-        private readonly SourceServerElement _sourceServerElement;
-        private readonly TargetServerElement _targetServerSection;
+        private readonly SourceServerSettings _sourceServerSettings;
+        private readonly TargetServerSettings _targetServerSettings;
 
-        public WebConfigSettingsRepository(IConfigurationHelper configurationHelper)
+        public WebConfigSettingsRepository(IOptions<StagingConfigurationSettings> stagingConfigurationSettingsOptions)
         {
-            var configuration = configurationHelper.GetWebConfiguration();
-            var stagingConfigurationSection =
-                configuration?.GetSection(StagingConfigurationSection.StagingConfigurationSectionName) as
-                    StagingConfigurationSection;
-            _sourceServerElement = stagingConfigurationSection?.SourceServerElement;
-            _targetServerSection = stagingConfigurationSection?.TargetServerSection;
+            var stagingConfigurationSettings = stagingConfigurationSettingsOptions?.Value;
+            _sourceServerSettings = stagingConfigurationSettings?.SourceServer;
+            _targetServerSettings = stagingConfigurationSettings?.TargetServer;
         }
 
         /// <summary>
@@ -59,9 +57,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<string> GetExcludedTypes()
         {
-            if (_sourceServerElement != null)
-                return _sourceServerElement.ExcludedTypesElementCollection
-                    .Where(x => !string.IsNullOrWhiteSpace(x.Name)).Select(x => x.Name.Trim()).ToList();
+            if ((_sourceServerSettings != null) && (_sourceServerSettings.ExcludedTypes != null))
+                return _sourceServerSettings.ExcludedTypes
+                    .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).ToList();
             return new List<string>();
         }
 
@@ -73,8 +71,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<ParentChildTypePair> GetExcludedChildTypes()
         {
-            if (_targetServerSection != null)
-                return _targetServerSection.ExcludedChildTypeElementCollection
+            if ((_targetServerSettings != null) && (_targetServerSettings.ExcludedChildTypes != null))
+                return _targetServerSettings.ExcludedChildTypes
                     .Where(x => !(string.IsNullOrWhiteSpace(x.ParentType) || string.IsNullOrWhiteSpace(x.ChildType)))
                     .Select(x => new ParentChildTypePair
                         {ParentType = x.ParentType.Trim(), ChildType = x.ChildType.Trim()})
@@ -88,9 +86,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<string> GetExcludedMediaLibraries()
         {
-            if (_sourceServerElement != null)
-                return _sourceServerElement.ExcludedMediaLibraryElementCollection
-                    .Where(x => !string.IsNullOrWhiteSpace(x.Code)).Select(x => x.Code.Trim()).ToList();
+            if ((_sourceServerSettings != null) && (_sourceServerSettings.ExcludedMediaLibraries != null))
+                return _sourceServerSettings.ExcludedMediaLibraries
+                    .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).ToList();
             return new List<string>();
         }
     }
