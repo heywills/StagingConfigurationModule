@@ -20,6 +20,8 @@ This module allows the use of these system events to be fully configurable, so t
 ## Installation
 To install, add the NuGet package, "KenticoCommunity.StagingConfigurationModule", to your CMS project and then add the web.config sections described below.
 
+Additionally, if your MVC site can perform operations that generate staging tasks (i.e., create User objects), you’ll want to add the package and web.config sections to your MVC project, too. However, on most projects you will only need to install the module to the CMS project, because often that is the only app that generates staging tasks.
+
 ## Usage
 After adding the NuGet package to your CMS project, the StagingConfigurationModule is installed. It will look for web.config sections to determine how to handle staging tasks. 
 
@@ -108,6 +110,13 @@ The most common use of this module is to prevent changes to certain types of obj
 ```
 <type name="ma.automationprocess" />
 <type name="cms.objectworkflowtrigger" />
+```
+
+### Prevent creating staging tasks for pages by type
+The ability to prevent staging tasks for objects by type allows us to prevent them for pages by type, too. You might need this if you have some content that you do not want to stage, like content synchronized from another source. For example, imagine a page type with the code “acme.location” that is used to store locations synchronized from another database. You could prevent staging tasks from being created for this content by adding “cms.document.acme.location” to the excluded types list like this:
+
+```
+<type name="cms.document.acme.location" />
 ```
 
 ### Prevent processing child objects
