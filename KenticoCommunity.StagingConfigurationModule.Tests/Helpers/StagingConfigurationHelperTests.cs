@@ -140,7 +140,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
 
         private string GetFakeMediaFilePath()
         {
-            return Path.Combine(PathHelper.GetTestConfigFilesDirectoryPath(), ConfigFileName.CorrectConfig);
+            return Path.Combine(PathHelper.GetTestConfigFilesDirectoryPath(), AppConfigFileName.CorrectConfig);
         }
 
     }

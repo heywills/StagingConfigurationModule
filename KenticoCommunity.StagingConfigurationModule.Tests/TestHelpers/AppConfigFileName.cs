@@ -1,6 +1,6 @@
 ﻿namespace KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers
 {
-    public static class ConfigFileName
+    public static class AppConfigFileName
     {
         public const string CorrectConfig = "correct.json";
         public const string EmptyCollections = "empty-collections.json";

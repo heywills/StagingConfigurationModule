@@ -11,7 +11,7 @@ using System.Linq;
 namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
 {
     [TestFixture]
-    public class WebConfigSettingsRepositoryTests
+    public class AppSettingsRepositoryTests
     {
 
         [TestCase(AppConfigFileName.CorrectConfig, 15)]
@@ -27,8 +27,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedTypes_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(configFileName);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var excludedTypes = webConfigSettingsRepository.GetExcludedTypes();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var excludedTypes = appSettingsRepository.GetExcludedTypes();
             Assert.AreEqual(expectedCount, excludedTypes.Count);
         }
 
@@ -36,8 +36,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedTypes_Returns_Trimmed_Name()
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(AppConfigFileName.Untrimmed);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var excludedTypes = webConfigSettingsRepository.GetExcludedTypes();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var excludedTypes = appSettingsRepository.GetExcludedTypes();
             Assert.AreEqual("cms.form", excludedTypes.FirstOrDefault());
         }
 
@@ -54,8 +54,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedMediaLibraries_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(configFileName);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var excludedMediaLibraries = webConfigSettingsRepository.GetExcludedMediaLibraries();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var excludedMediaLibraries = appSettingsRepository.GetExcludedMediaLibraries();
             Assert.AreEqual(expectedCount, excludedMediaLibraries.Count);
         }
 
@@ -63,8 +63,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedMediaLibraries_Returns_Trimmed_Name()
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(AppConfigFileName.Untrimmed);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var excludedMediaLibraries = webConfigSettingsRepository.GetExcludedMediaLibraries();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var excludedMediaLibraries = appSettingsRepository.GetExcludedMediaLibraries();
             Assert.AreEqual("emailimages", excludedMediaLibraries.FirstOrDefault());
         }
 
@@ -82,8 +82,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedChildTypes_Returns_Expected_List_Count(string configFileName, int expectedCount)
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(configFileName);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var childTypePairs = webConfigSettingsRepository.GetExcludedChildTypes();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var childTypePairs = appSettingsRepository.GetExcludedChildTypes();
             Assert.AreEqual(expectedCount, childTypePairs.Count);
         }
 
@@ -91,8 +91,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Repositories
         public void GetExcludedChildTypes_Returns_Trimmed_Name()
         {
             var stagingConfigurationSettingsOptions = OptionsFactory.CreateOptions<StagingConfigurationSettings>(AppConfigFileName.Untrimmed);
-            var webConfigSettingsRepository = new WebConfigSettingsRepository(stagingConfigurationSettingsOptions);
-            var childTypePairs = webConfigSettingsRepository.GetExcludedChildTypes();
+            var appSettingsRepository = new AppSettingsRepository(stagingConfigurationSettingsOptions);
+            var childTypePairs = appSettingsRepository.GetExcludedChildTypes();
             var childTypePair = childTypePairs.FirstOrDefault();
             Assert.AreEqual("cms.role", childTypePair?.ParentType);
             Assert.AreEqual("cms.userrole", childTypePair?.ChildType);
