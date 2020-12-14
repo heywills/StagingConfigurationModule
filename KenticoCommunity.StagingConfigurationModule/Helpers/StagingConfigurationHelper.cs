@@ -11,8 +11,6 @@ using KenticoCommunity.StagingConfigurationModule.Helpers;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Models;
 
-[assembly: RegisterImplementation(typeof(IStagingConfigurationHelper), typeof(StagingConfigurationHelper))]
-
 namespace KenticoCommunity.StagingConfigurationModule.Helpers
 {
     /// <summary>

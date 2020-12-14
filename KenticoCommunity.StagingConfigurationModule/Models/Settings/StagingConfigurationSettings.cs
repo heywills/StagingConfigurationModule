@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KenticoCommunity.StagingConfigurationModule.Configurations
+namespace KenticoCommunity.StagingConfigurationModule.Models.Settings
 {
     public class StagingConfigurationSettings
     {

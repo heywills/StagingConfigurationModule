@@ -3,6 +3,7 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.MediaLibrary;
 using CMS.Synchronization;
+using KenticoCommunity.StagingConfigurationModule.Infrastructure;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Modules;
 
@@ -29,6 +30,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
         {
         }
 
+        protected override void OnPreInit()
+        {
+            base.OnPreInit();
+            LegacyEnvironmentServiceRegistration.EnsureServiceRegistration();
+        }
+
         /// <summary>
         /// Initialize the module by creating the StagingCustomizationHelper and setting up the global system events.
         /// </summary>
@@ -38,6 +45,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
         /// </remarks>
         protected override void OnInit()
         {
+
             _stagingCustomizationModuleHelper = Service.Resolve<IStagingConfigurationHelper>();
             base.OnInit();
 

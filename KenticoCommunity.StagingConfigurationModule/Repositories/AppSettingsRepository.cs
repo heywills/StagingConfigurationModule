@@ -35,12 +35,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
     ///     </targetServer>
     /// </stagingConfiguration>
     /// </summary>
-    internal class WebConfigSettingsRepository : ISettingsRepository
+    internal class AppSettingsRepository : ISettingsRepository
     {
         private readonly SourceServerSettings _sourceServerSettings;
         private readonly TargetServerSettings _targetServerSettings;
 
-        public WebConfigSettingsRepository(IOptions<StagingConfigurationSettings> stagingConfigurationSettingsOptions)
+        public AppSettingsRepository(IOptions<StagingConfigurationSettings> stagingConfigurationSettingsOptions)
         {
             var stagingConfigurationSettings = stagingConfigurationSettingsOptions?.Value;
             _sourceServerSettings = stagingConfigurationSettings?.SourceServer;
