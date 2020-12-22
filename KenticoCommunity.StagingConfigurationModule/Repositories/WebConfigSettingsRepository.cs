@@ -1,9 +1,12 @@
-﻿using KenticoCommunity.StagingConfigurationModule.Models.Settings;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CMS;
+using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Models;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Linq;
+using KenticoCommunity.StagingConfigurationModule.Repositories;
+
+[assembly: RegisterImplementation(typeof(ISettingsRepository), typeof(WebConfigSettingsRepository))]
 
 namespace KenticoCommunity.StagingConfigurationModule.Repositories
 {
@@ -37,14 +40,17 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
     /// </summary>
     internal class WebConfigSettingsRepository : ISettingsRepository
     {
-        private readonly SourceServerSettings _sourceServerSettings;
-        private readonly TargetServerSettings _targetServerSettings;
+        private readonly SourceServerElement _sourceServerElement;
+        private readonly TargetServerElement _targetServerSection;
 
-        public WebConfigSettingsRepository(IOptions<StagingConfigurationSettings> stagingConfigurationSettingsOptions)
+        public WebConfigSettingsRepository(IConfigurationHelper configurationHelper)
         {
-            var stagingConfigurationSettings = stagingConfigurationSettingsOptions?.Value;
-            _sourceServerSettings = stagingConfigurationSettings?.SourceServer;
-            _targetServerSettings = stagingConfigurationSettings?.TargetServer;
+            var configuration = configurationHelper.GetWebConfiguration();
+            var stagingConfigurationSection =
+                configuration?.GetSection(StagingConfigurationSection.StagingConfigurationSectionName) as
+                    StagingConfigurationSection;
+            _sourceServerElement = stagingConfigurationSection?.SourceServerElement;
+            _targetServerSection = stagingConfigurationSection?.TargetServerSection;
         }
 
         /// <summary>
@@ -53,9 +59,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<string> GetExcludedTypes()
         {
-            if ((_sourceServerSettings != null) && (_sourceServerSettings.ExcludedTypes != null))
-                return _sourceServerSettings.ExcludedTypes
-                    .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).ToList();
+            if (_sourceServerElement != null)
+                return _sourceServerElement.ExcludedTypesElementCollection
+                    .Where(x => !string.IsNullOrWhiteSpace(x.Name)).Select(x => x.Name.Trim()).ToList();
             return new List<string>();
         }
 
@@ -67,8 +73,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<ParentChildTypePair> GetExcludedChildTypes()
         {
-            if ((_targetServerSettings != null) && (_targetServerSettings.ExcludedChildTypes != null))
-                return _targetServerSettings.ExcludedChildTypes
+            if (_targetServerSection != null)
+                return _targetServerSection.ExcludedChildTypeElementCollection
                     .Where(x => !(string.IsNullOrWhiteSpace(x.ParentType) || string.IsNullOrWhiteSpace(x.ChildType)))
                     .Select(x => new ParentChildTypePair
                         {ParentType = x.ParentType.Trim(), ChildType = x.ChildType.Trim()})
@@ -82,9 +88,9 @@ namespace KenticoCommunity.StagingConfigurationModule.Repositories
         /// <returns></returns>
         public List<string> GetExcludedMediaLibraries()
         {
-            if ((_sourceServerSettings != null) && (_sourceServerSettings.ExcludedMediaLibraries != null))
-                return _sourceServerSettings.ExcludedMediaLibraries
-                    .Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).ToList();
+            if (_sourceServerElement != null)
+                return _sourceServerElement.ExcludedMediaLibraryElementCollection
+                    .Where(x => !string.IsNullOrWhiteSpace(x.Code)).Select(x => x.Code.Trim()).ToList();
             return new List<string>();
         }
     }
