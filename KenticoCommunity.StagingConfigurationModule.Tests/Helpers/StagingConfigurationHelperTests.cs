@@ -1,4 +1,5 @@
-﻿using CMS.Core;
+﻿using System.Collections.Generic;
+using CMS.Core;
 using CMS.IO;
 using CMS.MediaLibrary;
 using CMS.Membership;
@@ -10,7 +11,6 @@ using KenticoCommunity.StagingConfigurationModule.Models;
 using KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers;
 using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
 
 
 namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
@@ -28,7 +28,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             Fake<UserInfo>();
             var userInfo = new UserInfo();
-            var result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
+            bool result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
             Assert.IsTrue(result);
         }
 
@@ -41,7 +41,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             Fake<UserInfo>();
             var userInfo = new UserInfo();
-            var result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
+            bool result = stagingCustomizationHelper.IsExcludedObjectType(userInfo);
             Assert.IsFalse(result);
         }
 
@@ -53,7 +53,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockEventLogService = CreateMockEventLogService();
             var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             var mediaFileInfo = GetFakeMediaFileInfo("EMAILtemplateassets");
-            var result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
+            bool result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
             Assert.IsTrue(result);
         }
 
@@ -65,7 +65,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             var mockEventLogService = CreateMockEventLogService();
             var stagingCustomizationHelper = new StagingConfigurationHelper(mockSettingsRepository.Object, mockEventLogService.Object);
             var mediaFileInfo = GetFakeMediaFileInfo("emailTemplateAssets");
-            var result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
+            bool result = stagingCustomizationHelper.IsExcludedMediaLibraryFile(mediaFileInfo);
             Assert.IsFalse(result);
         }
 
@@ -98,7 +98,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
                     ParentObjectType = parentType,
                     ObjectType = childType
                 };
-            var result = stagingCustomizationHelper.IsExcludedChildType(stagingChildProcessingTypeEventArgs);
+            bool result = stagingCustomizationHelper.IsExcludedChildType(stagingChildProcessingTypeEventArgs);
             Assert.AreEqual(expectedResult, result);
         }
 
@@ -119,7 +119,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
         {
             var mockEventLogService = new Mock<IEventLogService>();
             mockEventLogService.Setup(m =>
-                m.LogEvent(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
+                m.LogEvent(It.IsAny<EventLogData>()));
             return mockEventLogService;
         }
 
@@ -140,10 +140,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Tests.Helpers
             return mediaFileInfo;
         }
 
-        private string GetFakeMediaFilePath()
-        {
-            return Path.Combine(PathHelper.GetTestConfigFilesDirectoryPath(), ConfigFileName.CorrectConfig);
-        }
+        private string GetFakeMediaFilePath() => Path.Combine(PathHelper.GetTestConfigFilesDirectoryPath(), ConfigFileName.CorrectConfig);
 
     }
 }

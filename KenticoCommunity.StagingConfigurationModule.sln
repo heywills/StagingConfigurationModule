@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1209
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenticoCommunity.StagingConfigurationModule", "KenticoCommunity.StagingConfigurationModule\KenticoCommunity.StagingConfigurationModule.csproj", "{E76AEF79-F656-4E0F-B15D-A07DE3DAECFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KenticoCommunity.StagingConfigurationModule", "KenticoCommunity.StagingConfigurationModule\KenticoCommunity.StagingConfigurationModule.csproj", "{E76AEF79-F656-4E0F-B15D-A07DE3DAECFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KenticoCommunity.StagingConfigurationModule.Tests", "KenticoCommunity.StagingConfigurationModule.Tests\KenticoCommunity.StagingConfigurationModule.Tests.csproj", "{2BED6668-E824-48AD-AEF4-5F6A9ADB8243}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KenticoCommunity.StagingConfigurationModule.Tests", "KenticoCommunity.StagingConfigurationModule.Tests\KenticoCommunity.StagingConfigurationModule.Tests.csproj", "{2BED6668-E824-48AD-AEF4-5F6A9ADB8243}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{334538EE-2AC1-43DA-873B-1945E282FF7F}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
