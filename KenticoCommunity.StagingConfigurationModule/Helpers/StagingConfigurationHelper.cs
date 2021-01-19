@@ -4,7 +4,6 @@ using System.Linq;
 using CMS;
 using CMS.Core;
 using CMS.DataEngine;
-using CMS.EventLog;
 using CMS.MediaLibrary;
 using CMS.Synchronization;
 using KenticoCommunity.StagingConfigurationModule.Helpers;
@@ -48,8 +47,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Helpers
         /// </returns>
         public bool IsExcludedMediaLibraryFile(IInfo infoObject)
         {
-            if (!(infoObject is MediaFileInfo mediaFileInfo)) return false;
-            var mediaLibraryInfo = (MediaLibraryInfo) mediaFileInfo.Parent;
+            if (!(infoObject is MediaFileInfo mediaFileInfo))
+            {
+                return false;
+            }
+
+            var mediaLibraryInfo = (MediaLibraryInfo)mediaFileInfo.Parent;
             return _excludedMediaLibraries.Contains(mediaLibraryInfo.LibraryName, StringComparer.OrdinalIgnoreCase);
         }
 
@@ -61,7 +64,7 @@ namespace KenticoCommunity.StagingConfigurationModule.Helpers
         public bool IsExcludedObjectType(IInfo infoObject)
         {
             var typeInfo = infoObject.TypeInfo;
-            var objectType = typeInfo.ObjectType;
+            string objectType = typeInfo.ObjectType;
             return _excludedTypes.Contains(objectType, StringComparer.OrdinalIgnoreCase);
         }
 
@@ -73,8 +76,8 @@ namespace KenticoCommunity.StagingConfigurationModule.Helpers
         /// <returns>Returns true if the parent/child type relationship is in the exclusion list.</returns>
         public bool IsExcludedChildType(StagingChildProcessingTypeEventArgs eventArgs)
         {
-            var currentParentType = eventArgs.ParentObjectType;
-            var currentChildType = eventArgs.ObjectType;
+            string currentParentType = eventArgs.ParentObjectType;
+            string currentChildType = eventArgs.ObjectType;
             return _excludedChildTypes.Exists(pair =>
                 pair.ParentType.Equals(currentParentType, StringComparison.OrdinalIgnoreCase) &&
                 pair.ChildType.Equals(currentChildType, StringComparison.OrdinalIgnoreCase));
@@ -85,9 +88,10 @@ namespace KenticoCommunity.StagingConfigurationModule.Helpers
         /// </summary>
         /// <param name="source"></param>
         /// <param name="message"></param>
-        public void LogInformation(string source, string message)
-        {
-            _eventLogService.LogEvent(EventType.INFORMATION, ModuleName, source, message);
-        }
+        public void LogInformation(string source, string message) =>
+            _eventLogService.LogEvent(new EventLogData(EventTypeEnum.Information, source, ModuleName)
+            {
+                EventDescription = message
+            });
     }
 }
