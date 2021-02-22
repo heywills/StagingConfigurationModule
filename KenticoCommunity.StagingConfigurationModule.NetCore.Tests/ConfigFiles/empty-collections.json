@@ -1,0 +1,14 @@
+﻿{
+  "stagingConfiguration": {
+    "sourceServer": {
+      "excludedTypes": [
+      ],
+      "excludedMediaLibraries": [
+      ]
+    },
+    "targetServer": {
+      "excludedChildTypes": [
+      ]
+    }
+  }
+}

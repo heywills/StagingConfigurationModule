@@ -1,0 +1,18 @@
+﻿{
+  "stagingConfiguration": {
+    "sourceServer": {
+      "excludedTypes": [
+      ],
+      "excludedMediaLibraries": [
+      ]
+    },
+    "targetServer": {
+      "excludedChildTypes": [
+        {
+          "parentTypeBad": "cms.role",
+          "childTypeBad": "cms.userrole"
+        }
+      ]
+    }
+  }
+}

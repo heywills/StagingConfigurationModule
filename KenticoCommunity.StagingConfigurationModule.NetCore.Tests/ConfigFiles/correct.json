@@ -1,0 +1,35 @@
+﻿{
+  "stagingConfiguration": {
+    "sourceServer": {
+      "excludedTypes": [
+        "cms.form",
+        "cms.settingskey",
+        "cms.scheduledtask",
+        "cms.user",
+        "cms.userculture",
+        "cms.userrole",
+        "cms.usersite",
+        "cms.usermacroidentity",
+        "ma.automationprocess",
+        "cms.objectworkflowtrigger",
+        "newsletter.emailtemplatenewsletter",
+        "newsletter.issue",
+        "newsletter.newsletter",
+        "om.contactgroup",
+        "cms.category"
+      ],
+      "excludedMediaLibraries": [
+        "emailimages",
+        "downloads"
+      ]
+    },
+    "targetServer": {
+      "excludedChildTypes": [
+        {
+          "parentType": "cms.role",
+          "childType": "cms.userrole"
+        }
+      ]
+    }
+  }
+}
