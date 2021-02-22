@@ -1,6 +1,5 @@
 ﻿using System.Configuration;
 using System.IO;
-using System.Web.Configuration;
 using CMS;
 using CMS.Base;
 using KenticoCommunity.StagingConfigurationModule.Configurations;
@@ -35,20 +34,10 @@ namespace KenticoCommunity.StagingConfigurationModule.Configurations
         /// <returns></returns>
         public Configuration OpenConfiguration(string appPath, string configFileName = "web.config")
         {
-            var mapping = new VirtualDirectoryMapping(appPath, true, configFileName);
-            var webConfigurationFileMap = new WebConfigurationFileMap();
-            webConfigurationFileMap.VirtualDirectories.Add(string.Empty, mapping);
-            try
+            return ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap
             {
-                return WebConfigurationManager.OpenMappedWebConfiguration(webConfigurationFileMap, string.Empty);
-            }
-            catch
-            {
-                return ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap
-                {
-                    ExeConfigFilename = Path.Combine(appPath, configFileName)
-                }, ConfigurationUserLevel.None);
-            }
+                ExeConfigFilename = Path.Combine(appPath, configFileName)
+            }, ConfigurationUserLevel.None);
         }
     }
 }
