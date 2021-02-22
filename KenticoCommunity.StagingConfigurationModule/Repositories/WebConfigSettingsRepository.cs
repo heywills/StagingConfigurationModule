@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CMS;
 using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Models;
-using KenticoCommunity.StagingConfigurationModule.Repositories;
-
-[assembly: RegisterImplementation(typeof(ISettingsRepository), typeof(WebConfigSettingsRepository))]
 
 namespace KenticoCommunity.StagingConfigurationModule.Repositories
 {

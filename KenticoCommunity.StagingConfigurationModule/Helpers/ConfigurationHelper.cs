@@ -1,13 +1,9 @@
 ﻿using System.Configuration;
 using System.IO;
-using CMS;
 using CMS.Base;
-using KenticoCommunity.StagingConfigurationModule.Configurations;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 
-[assembly: RegisterImplementation(typeof(IConfigurationHelper), typeof(ConfigurationHelper))]
-
-namespace KenticoCommunity.StagingConfigurationModule.Configurations
+namespace KenticoCommunity.StagingConfigurationModule.Helpers
 {
     /// <summary>
     /// Helper class to provide the correct configuration file for the current context. This will ensure the web.config file
