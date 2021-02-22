@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
+    <Authors>Kentico Community</Authors>
+    <PackageProjectUrl>https://github.com/heywills/StagingConfigurationModule</PackageProjectUrl>
+    <Version>13.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,5 +15,4 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web" />
   </ItemGroup>
-
 </Project>
