@@ -8,32 +8,33 @@ using System.Linq;
 namespace KenticoCommunity.StagingConfigurationModule.Repositories
 {
     /// <summary>
-    /// Provide the settings required by the StagingConfigurationModule from the Kentico web app's web.config file (even if
-    /// being run in ContinuousIntegration.exe). The settings include:
+    /// Provide the settings required by the StagingConfigurationModule from the .NET Core appsettings file 
+    /// The settings include:
     /// - Excluded types
     /// - Media libraries for which to excluded media files
     /// - Excluded child types
-    /// Use the following snippet to add configurations to the web.config:
-    /// <configSections>
-    ///     <section name="stagingConfiguration"
-    ///         type="KenticoCommunity.StagingConfigurationModule.Configurations.StagingConfigurationSection,KenticoCommunity.StagingConfigurationModule" />
-    /// </configSections>
-    /// <stagingConfiguration>
-    ///     <sourceServer>
-    ///         <excludedTypes>
-    ///             <type name="cms.user" />
-    ///             <type name="cms.userculture" />
-    ///         </excludedTypes>
-    ///         <excludedMediaLibraries>
-    ///             <mediaLibrary code="templateImages" />
-    ///         </excludedMediaLibraries>
-    ///     </sourceServer>
-    ///     <targetServer>
-    ///         <excludedChildTypes>
-    ///             <childType parentType="cms.role" childType="cms.userrole" />
-    ///         </excludedChildTypes>
-    ///     </targetServer>
-    /// </stagingConfiguration>
+    /// Use the following snippet to add configurations to an appsettings.json file:
+    ///
+    ///  "stagingConfiguration": {
+    ///    "sourceServer": {
+    ///      "excludedTypes": [
+    ///        "cms.user",
+    ///        "cms.userculture"
+    ///      ],
+    ///      "excludedMediaLibraries": [
+    ///        "templateImages"
+    ///      ]
+    ///    },
+    ///    "targetServer": {
+    ///        "excludedChildTypes": [
+    ///        {
+    ///          "parentType": "cms.role",
+    ///          "childType": "cms.userrole"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///
     /// </summary>
     internal class AppSettingsRepository : ISettingsRepository
     {
