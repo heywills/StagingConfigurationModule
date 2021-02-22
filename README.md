@@ -186,7 +186,18 @@ If your MVC site can perform operations that generate staging tasks (
 If you need to prevent staging tasks from being generated in a .NET Framework MVC app, add the NuGet package to your MVC app and add the same web.config settings that you added to the CMS app's web.config, to your MVC app's web.config.
 
 #### Using in a .NET Core App
-If you are using a .NET Core app with Xperience 13, you can also use this module to prevent staging tasks from being generated. Add the NuGet package to your .NET Core app.  The module will read from your appsettings.json configuration instead of from a web.config file.  Add your configurations using the following appsettings.json sample:
+If you are using a .NET Core app with Xperience 13, you can also use this module to prevent staging tasks from being generated. Here's how to add it to a .NET Core app:
+
+1. Add the NuGet package to your .NET Core app.
+2. Add the following using statement to your application startup:
+```
+using KenticoCommunity.StagingConfigurationModule.Extensions;
+```
+3. Call the extension method `AddStagingConfigurationModuleServices` on the services collection to register the module's dependencies:
+```
+services.AddStagingConfigurationModuleServices(Configuration);
+```
+4. The module will read from your appsettings.json configuration instead of from a web.config file.  Add your configurations using the following appsettings.json sample:
 
 ```
 "stagingConfiguration": {
