@@ -3,6 +3,7 @@ using CMS.Core;
 using CMS.DataEngine;
 using CMS.MediaLibrary;
 using CMS.Synchronization;
+using KenticoCommunity.StagingConfigurationModule.Infrastructure;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Modules;
 
@@ -27,6 +28,12 @@ namespace KenticoCommunity.StagingConfigurationModule.Modules
 
         public StagingConfigurationModule() : base(nameof(StagingConfigurationModule))
         {
+        }
+
+        protected override void OnPreInit()
+        {
+            base.OnPreInit();
+            LegacyEnvironmentServiceRegistration.EnsureServiceRegistration();
         }
 
         /// <summary>

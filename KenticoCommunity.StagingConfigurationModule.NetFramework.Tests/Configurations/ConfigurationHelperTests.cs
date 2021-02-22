@@ -1,5 +1,5 @@
 ﻿using CMS.Base;
-using KenticoCommunity.StagingConfigurationModule.Configurations;
+using KenticoCommunity.StagingConfigurationModule.Helpers;
 using KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers;
 using NUnit.Framework;
 

@@ -1,0 +1,21 @@
+﻿{
+  "stagingConfiguration": {
+    "sourceServer": {
+      "excludedTypesBad": [
+        "om.contactgroup",
+        "cms.category"
+      ],
+      "excludedMediaLibrariesBad": [
+        "downloads"
+      ]
+    },
+    "targetServer": {
+      "excludedChildTypesBad": [
+        {
+          "parentType": "cms.role",
+          "childType": "cms.userrole"
+        }
+      ]
+    }
+  }
+}

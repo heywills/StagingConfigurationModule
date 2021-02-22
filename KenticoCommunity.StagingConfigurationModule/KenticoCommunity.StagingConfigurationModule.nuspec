@@ -16,7 +16,8 @@
 		<tags>Kentico Xperience Staging Deployment</tags>
 		<dependencies>
 			<dependency id="Kentico.Xperience.Libraries" version="[13.0.0,13.0.99)" />
-		</dependencies>
+      <dependency id="System.Configuration.ConfigurationManager" version="4.7.0" />
+    </dependencies>
 	</metadata>
 	<files>
 		<file src="images\icon.png" target="images\" />	

@@ -1,0 +1,20 @@
+﻿{
+  "stagingConfiguration": {
+    "sourceServer": {
+      "excludedTypes": [
+        " cms.form "
+      ],
+      "excludedMediaLibraries": [
+        " emailimages "
+      ]
+    },
+    "targetServer": {
+      "excludedChildTypes": [
+        {
+          "parentType": " cms.role ",
+          "childType": " cms.userrole "
+        }
+      ]
+    }
+  }
+}

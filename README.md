@@ -15,12 +15,12 @@ This module allows the use of these system events to be fully configurable, so t
 
 ## Compatibility
 * .NET 4.6.1 or higher
-* Kentico Xperience 12.0.29 or higher
+* Kentico Xperience versions
+  - 12.0.29 or higher (use KenticoCommunity.PageAssetFolders 12.0.0)
+  - 13.0.0 or higher (use KenticoCommunity.PageAssetFolders 13.0.5)
 
 ## Installation
 To install, add the NuGet package, "KenticoCommunity.StagingConfigurationModule", to your CMS project and then add the web.config sections described below.
-
-Additionally, if your MVC site can perform operations that generate staging tasks (i.e., create User objects), you’ll want to add the package and web.config sections to your MVC project, too. However, on most projects you will only need to install the module to the CMS project, because often that is the only app that generates staging tasks.
 
 ## Usage
 After adding the NuGet package to your CMS project, the StagingConfigurationModule is installed. It will look for web.config sections to determine how to handle staging tasks. 
@@ -177,6 +177,42 @@ Web.config transformations is a powerful way to provide environment-specific set
     </sourceServer>
   </stagingConfiguration>
 </configuration>
+```
+
+### Prevent web site generated staging tasks
+If your MVC site can perform operations that generate staging tasks (i.e., create user objects), you’ll want to add the package and configurations to your MVC project. However, on most projects you will only need to install the module to the CMS project, because often that is the only app that generates staging tasks.
+
+#### Using in a .NET Framework MVC App
+If you need to prevent staging tasks from being generated in a .NET Framework MVC app, add the NuGet package to your MVC app and add the same web.config settings that you added to the CMS app's web.config, to your MVC app's web.config.
+
+#### Using in a .NET Core App
+If you are using a .NET Core app with Xperience 13, you can also use this module to prevent staging tasks from being generated. Add the NuGet package to your .NET Core app.  The module will read from your appsettings.json configuration instead of from a web.config file.  Add your configurations using the following appsettings.json sample:
+
+```
+"stagingConfiguration": {
+  "sourceServer": {
+    "excludedTypes": [
+      "cms.settingskey",
+      "cms.scheduledtask",
+      "cms.user",
+      "cms.userculture",
+      "cms.userrole",
+      "cms.usersite",
+      "cms.usermacroidentity"
+    ],
+    "excludedMediaLibraries": [
+      "templatelibrary"
+    ]
+  },
+  "targetServer": {
+    "excludedChildTypes": [
+      {
+        "parentType": "cms.role",
+        "childType": "cms.userrole"
+      }
+    ]
+  }
+}  
 ```
 
 

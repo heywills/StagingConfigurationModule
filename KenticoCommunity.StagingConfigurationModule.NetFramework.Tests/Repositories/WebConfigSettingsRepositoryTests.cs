@@ -1,4 +1,4 @@
-﻿using KenticoCommunity.StagingConfigurationModule.Configurations;
+﻿using KenticoCommunity.StagingConfigurationModule.Helpers;
 using KenticoCommunity.StagingConfigurationModule.Interfaces;
 using KenticoCommunity.StagingConfigurationModule.Repositories;
 using KenticoCommunity.StagingConfigurationModule.Tests.TestHelpers;
