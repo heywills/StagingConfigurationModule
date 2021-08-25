@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.Libraries.Tests" Version="13.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.8" />
     <PackageReference Include="Moq" Version="4.16.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
   </ItemGroup>
