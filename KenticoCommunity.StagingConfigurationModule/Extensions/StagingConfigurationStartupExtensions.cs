@@ -42,8 +42,11 @@ namespace KenticoCommunity.StagingConfigurationModule.Extensions
             }
             else
             {
-                services.AddOptions<StagingConfigurationSettings>()
-                    .Bind(configuration.GetSection(configurationKey));
+                if (configuration != null)
+                {
+                    services.AddOptions<StagingConfigurationSettings>()
+                            .Bind(configuration.GetSection(configurationKey));
+                }
                 services.AddSingleton<ISettingsRepository, AppSettingsRepository>();
             }
             services.AddTransient<IConfigurationHelper, ConfigurationHelper>();
